@@ -1,1 +1,5 @@
-* @mktavish
+* @MkTavish
+*.js @MkTavish
+*.yml @MkTavish
+*.yaml @MkTavish
+/public/ @MkTavish
