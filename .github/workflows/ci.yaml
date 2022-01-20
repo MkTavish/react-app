@@ -2,6 +2,8 @@ name: CI
 on:
   pull_request:
     branches: [develop]
+  push:
+    branches: [develop]
 
 jobs:
   build:
@@ -18,3 +20,12 @@ jobs:
           npm test -- --coverage
         env:
           CI: true
+      - name: Build Project
+        if: github.eventname == 'push'
+        run: npm run build
+      - name: Deploy to Staging
+        if: github.eventname == 'push'
+        run: npx surge -project ./build --domain flagrant-clocks.surge.sh
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
