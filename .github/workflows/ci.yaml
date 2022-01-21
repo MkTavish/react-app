@@ -1,9 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [develop, master]
   push:
-    branches: [develop, main]
+    branches: [develop, master]
 
 jobs:
   build:
@@ -42,10 +42,10 @@ jobs:
           name: build
           path: build
       - name: Create a Release
-        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN}}
       - name: Deploy to Staging
         if: github.event_name == 'push'
         run: npx surge -project ./build --domain flagrant-clocks.surge.sh
