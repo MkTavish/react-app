@@ -15,7 +15,7 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} #Cachekey for packages specific to our os
-          restore-key: | #Extra keys Github can use if main key is not found
+          restore-keys: | #Extra keys Github can use if main key is not found
             ${{ runner.os }}-node-
       - name: Use NodeJS
         uses: actions/setup-node@v1
