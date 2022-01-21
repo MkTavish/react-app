@@ -46,8 +46,7 @@ jobs:
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
-          
-      - name: Deploy to Staging
+      - name: Deploying to Staging
         if: github.event_name == 'push'
         run: npx surge -project ./build --domain flagrant-clocks.surge.sh
         env:
